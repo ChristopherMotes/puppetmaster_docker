@@ -1,7 +1,4 @@
 #!/bin/bash
-echo -e "/dev/xvdb1\t/container_fs/\txfs     defaults        0 0" >> /etc/fstab
-mkdir /container_fs
-mount -a
 tee /etc/yum.repos.d/docker.repo <<-'EOF'
 [dockerrepo]
 name=Docker Repository
@@ -19,3 +16,7 @@ INSTANCEID=`curl http://169.254.169.254/latest/meta-data/instance-id`
 MAC=`ip a s eth0 | grep 'link/ether' | awk ' { print $2 } '`
 IFACEID=`curl http://169.254.169.254/latest/meta-data/network/interfaces/macs/$MAC/interface-id`
 /usr/local/bin/aws ec2 assign-private-ip-addresses --network-interface-id $IFACEID --private-ip-addresses 192.168.0.50 --allow-reassignment --region us-east-1
+/usr/local/bin/aws ec2 attach-volume --volume-id vol-09c191675a98a1401 --instance-id $INSTANCEID --device /dev/sdb
+echo -e "/dev/xvdb1\t/container_fs/\txfs     defaults        0 0" >> /etc/fstab
+mkdir /container_fs
+mount -a
