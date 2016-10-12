@@ -19,4 +19,11 @@ IFACEID=`curl http://169.254.169.254/latest/meta-data/network/interfaces/macs/$M
 /usr/local/bin/aws ec2 attach-volume --volume-id vol-09c191675a98a1401 --instance-id $INSTANCEID --device /dev/sdb --region us-east-1
 echo -e "/dev/xvdb1\t/container_fs/\txfs     defaults        0 0" >> /etc/fstab
 mkdir /container_fs
-mount -a
+for x in 1 2 3 4 5 6 7 8 9 10
+do 
+ mount -a && break
+ sleep 5
+done
+ip addr add 192.168.0.50 dev  eth0
+systemctl enable docker
+systemctl start docker
