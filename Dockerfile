@@ -8,8 +8,3 @@ run useradd -u  50996 -g 50996 -c "puppetdb daemon" -M -d /opt/puppetlabs/server
 RUN yum -y install local  https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 RUN yum -y install puppetserver puppet
 COPY master/puppetserver /etc/sysconfig/puppetserver
-#RUN puppet agent -t 
-RUN yum -y install  puppetdb
-
-
-
