@@ -8,4 +8,5 @@ run useradd -u  50996 -g 50996 -c "puppetdb daemon" -M -d /opt/puppetlabs/server
 RUN yum -y install local  https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
 RUN yum -y install puppetserver puppet-agent
 COPY master/puppetserver /etc/sysconfig/puppetserver
-RUN gem install r10k
+RUN /opt/puppetlabs/puppet/bin/gem install r10k
+COPY r10k/r10k.yaml /etc/puppetlabs/r10k/r10k.yaml
