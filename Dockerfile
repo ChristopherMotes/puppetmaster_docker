@@ -13,5 +13,13 @@ COPY master/puppet.conf /etc/puppetlabs/puppet/puppet.conf
 COPY master/puppetdb.conf /etc/puppetlabs/puppet/puppetdb.conf
 COPY master/routes.yaml /etc/puppetlabs/puppet/routes.yaml
 RUN chown -R puppet:puppet `/opt/puppetlabs/puppet/bin/puppet config print confdir`
+COPY puppetdb/jetty.ini /etc/puppetlabs/puppetdb/conf.d/jetty.ini
+COPY puppetdb/database.ini /etc/puppetlabs/puppetdb/conf.d/database.ini
+COPY puppetdb/ssl/ca.pem /etc/puppetlabs/puppetdb/ssl/ca.pem
+COPY puppetdb/ssl/private.pem /etc/puppetlabs/puppetdb/ssl/private.pem
+RUN chmod 700 /etc/puppetlabs/puppetdb/ssl
+RUN chmod 600 /etc/puppetlabs/puppetdb/ssl/*
+COPY puppetdb/ssl/public.pem /etc/puppetlabs/puppetdb/ssl/public.pem
+RUN chown -R  puppetdb:puppetdb /etc/puppetlabs/puppetdb
 RUN /opt/puppetlabs/puppet/bin/gem install r10k
 COPY r10k/r10k.yaml /etc/puppetlabs/r10k/r10k.yaml
