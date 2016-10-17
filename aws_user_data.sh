@@ -24,6 +24,6 @@ do
  mount -a && break
  sleep 5
 done
-ip addr add 192.168.0.50 dev  eth0
+ip addr add 192.168.0.50/27 dev  eth0
 systemctl enable docker
 systemctl start docker
