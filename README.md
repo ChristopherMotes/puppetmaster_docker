@@ -4,7 +4,7 @@ sudo `aws ecr get-login --region us-east-1`
 ```
 Docker Run Command for puppetmaster
 ```
-udo docker run -d --name=puppetmaster --add-host puppetdb.maint.motes:192.168.0.51 -p 192.168.0.50:8140:8140 -h puppet.maint.motes -v /container_fs/ssl:/etc/puppetlabs/puppet/ssl 742758411692.dkr.ecr.us-east-1.amazonaws.com/puppetmaster:latest /opt/puppetlabs/server/bin/puppetserver foreground
+sudo docker run -d --name=puppetmaster --add-host "puppetdb.maint.motes puppetdb":192.168.0.51 -p 192.168.0.50:8140:8140 -h puppet.maint.motes -v /container_fs/ssl:/etc/puppetlabs/puppet/ssl 742758411692.dkr.ecr.us-east-1.amazonaws.com/puppetmaster:latest /opt/puppetlabs/server/bin/puppetserver foreground
 ```
 module deploy command
 ```
